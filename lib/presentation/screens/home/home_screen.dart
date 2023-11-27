@@ -1,4 +1,5 @@
 import 'package:clinic_app/presentation/screens/auth/welcome_screen.dart';
+import 'package:clinic_app/presentation/screens/home/profile_screen.dart';
 import 'package:clinic_app/presentation/theme/app_colors.dart';
 import 'package:clinic_app/presentation/theme/app_fonts.dart';
 import 'package:clinic_app/presentation/widgets/settings_button.dart';
@@ -51,49 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     ),
-    Scaffold(
-      appBar: AppBar(
-        actions: [
-          SettigsButton(
-            onPressed: () {},
-          ),
-        ],
-        centerTitle: false,
-        title: Text(
-          'Мой профиль',
-          style: AppFonts.w700s34.copyWith(
-            color: AppColors.black,
-          ),
-        ),
-      ),
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 16,
-              ),
-              CircleAvatar(
-                radius: 50,
-                backgroundColor: AppColors.lightBlue,
-                child: Text(
-                  'АА',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 40,
-                    fontFamily: 'SF Pro Display',
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
+    const ProfileScreen(),
   ];
 
   @override
