@@ -5,8 +5,11 @@ import 'package:clinic_app/presentation/theme/app_colors.dart';
 import 'package:clinic_app/presentation/theme/app_fonts.dart';
 import 'package:clinic_app/presentation/widgets/settings_button.dart';
 import 'package:clinic_app/presentation/widgets/shared_prefs_widget.dart';
+import 'package:clinic_app/resources/resources.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -18,6 +21,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String? imagePath;
+  File? pickedFile;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,11 +108,104 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 formatNumber(),
                 style: AppFonts.w500s22,
               ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.49,
+                child: DefaultTabController(
+                  length: 3,
+                  child: Column(
+                    children: [
+                      TabBar(
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicatorColor: AppColors.buttonColor,
+                        unselectedLabelStyle: AppFonts.w500s15,
+                        labelStyle: AppFonts.w500s15,
+                        tabs: [
+                          Tab(
+                            icon: SvgPicture.asset(AppSvgs.analys),
+                            text: 'Анализы',
+                          ),
+                          Tab(
+                            icon: SvgPicture.asset(AppSvgs.dyagnos),
+                            text: 'Диагнозы',
+                          ),
+                          Tab(
+                            icon: SvgPicture.asset(AppSvgs.recomends),
+                            text: 'Рекомендации',
+                          )
+                        ],
+                      ),
+                      Expanded(
+                        child: TabBarView(
+                          children: [
+                            Center(
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 32,
+                                  ),
+                                  Image.asset(
+                                    AppPngs.analys,
+                                    height: 105.h,
+                                  ),
+                                  const SizedBox(
+                                    height: 22,
+                                  ),
+                                  Text(
+                                    'У вас пока нет добавленных результатов \nанализов',
+                                    style: AppFonts.w500s15.copyWith(
+                                      color: AppColors.fontsColor,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(
+                                    height: 33,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        AppSvgs.add_,
+                                      ),
+                                      TextButton(
+                                        onPressed: openFilePicker,
+                                        child: const Text(
+                                          'Добавить документ',
+                                          style: AppFonts.w500s15,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            const Center(
+                              child: Text('2'),
+                            ),
+                            const Center(
+                              child: Text('3'),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> openFilePicker() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      pickedFile = File(result.files.single.path!);
+    } else {
+      // User canceled the picker
+    }
   }
 
   void openDialog() {

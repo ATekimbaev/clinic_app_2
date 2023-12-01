@@ -5,6 +5,7 @@ import 'package:clinic_app/resources/resources.dart';
 
 void main() {
   test('app_pngs assets test', () {
+    expect(File(AppPngs.analys).existsSync(), true);
     expect(File(AppPngs.bell).existsSync(), true);
     expect(File(AppPngs.car).existsSync(), true);
     expect(File(AppPngs.clipboard).existsSync(), true);

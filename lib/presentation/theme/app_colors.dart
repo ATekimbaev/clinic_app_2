@@ -11,4 +11,6 @@ abstract class AppColors {
 
   static const Color white = Colors.white;
   static const Color lightBlue = Color(0xffB6D8FF);
+  static Color textfieldColorWithOpacity =
+      const Color(0xff8e8e93).withOpacity(0.12);
 }

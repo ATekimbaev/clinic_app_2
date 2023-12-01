@@ -1,11 +1,15 @@
 import 'package:clinic_app/presentation/screens/auth/welcome_screen.dart';
+import 'package:clinic_app/presentation/screens/home/doctors_screen.dart';
 import 'package:clinic_app/presentation/screens/home/profile_screen.dart';
 import 'package:clinic_app/presentation/theme/app_colors.dart';
 import 'package:clinic_app/presentation/theme/app_fonts.dart';
+import 'package:clinic_app/presentation/widgets/search_text_field.dart';
 import 'package:clinic_app/presentation/widgets/settings_button.dart';
 import 'package:clinic_app/resources/resources.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,17 +21,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final PersistentTabController _controller = PersistentTabController(
-    initialIndex: 4,
+    initialIndex: 0,
   );
   List<Widget> screens = [
-    const Scaffold(
-      body: Center(
-        child: Text(
-          'Доктора',
-          style: AppFonts.w700s34,
-        ),
-      ),
-    ),
+    const DoctorsScreen(),
     const Scaffold(
       body: Center(
         child: Text(
