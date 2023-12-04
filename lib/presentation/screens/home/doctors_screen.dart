@@ -1,8 +1,13 @@
+import 'package:clinic_app/data/models/doctors_model.dart';
+import 'package:clinic_app/presentation/screens/home/doctors_info_screen.dart';
 import 'package:clinic_app/presentation/theme/app_colors.dart';
 import 'package:clinic_app/presentation/theme/app_fonts.dart';
+import 'package:clinic_app/presentation/widgets/custom_chip_widget.dart';
+import 'package:clinic_app/presentation/widgets/doctors_item_widget.dart';
 import 'package:clinic_app/presentation/widgets/search_text_field.dart';
 import 'package:clinic_app/resources/resources.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DoctorsScreen extends StatefulWidget {
@@ -82,52 +87,33 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                 ),
-              )
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.57,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: AppColors.black,
+                ),
+                child: ListView.builder(
+                  itemBuilder: (context, index) => DoctorsInfoWidget(
+                    model: DoctorsData.doctors[index],
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DoctorsInfoScreen(
+                            model: DoctorsData.doctors[index],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  itemCount: DoctorsData.doctors.length,
+                ),
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class MyCihp extends StatelessWidget {
-  const MyCihp({
-    super.key,
-    required this.isSelected,
-    required this.title,
-    required this.onSelected,
-  });
-
-  final String title;
-  final bool isSelected;
-  final Function(bool) onSelected;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 5,
-      ),
-      child: ChoiceChip(
-        onSelected: onSelected,
-        showCheckmark: false,
-        avatarBorder: RoundedRectangleBorder(
-          side: const BorderSide(
-            color: AppColors.black,
-          ),
-          borderRadius: BorderRadius.circular(
-            4,
-          ),
-        ),
-        backgroundColor: AppColors.white,
-        selectedColor: AppColors.buttonColor,
-        label: Text(
-          title,
-          style: AppFonts.w600s15.copyWith(
-            color: isSelected ? AppColors.white : AppColors.fontsColor,
-          ),
-        ),
-        selected: isSelected,
       ),
     );
   }

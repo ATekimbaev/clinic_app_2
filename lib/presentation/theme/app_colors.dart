@@ -8,6 +8,7 @@ abstract class AppColors {
   static const Color hintTextColor = Color(0xFF979797);
 
   static const Color iconBackGroundColor = Color(0xFFC4C4C4);
+  static const Color bodyBackGroundColor = Color(0xffEfeff3);
 
   static const Color white = Colors.white;
   static const Color lightBlue = Color(0xffB6D8FF);
